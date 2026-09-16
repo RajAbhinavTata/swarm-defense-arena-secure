@@ -44,7 +44,7 @@ The bundled queue and JSON store are intentionally optimized for one trusted wor
 
 ## Requirements
 
-- Node.js 20.11+
+- Node.js 22.13+
 - pnpm 11
 - Playwright Chromium
 
