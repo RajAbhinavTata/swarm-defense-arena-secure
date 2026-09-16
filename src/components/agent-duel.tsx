@@ -1,4 +1,4 @@
-import type { RedTeamType, TaskAgentType } from '@/lib/simulation/types';
+import type { RedTeamType, TaskAgentType } from '@/lib/run-engine/types';
 
 export function AgentDuel({
   taskAgentType,

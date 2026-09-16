@@ -86,13 +86,13 @@ pnpm seed         # deterministic sample sessions
 
 ## Routes
 
-- `/configure` — configure a live-web duel
-- `/arena/[gameId]` — live viewport, threat HUD, and agent feeds
-- `/history` and `/history/[gameId]` — run list and replay
-- `/dataset` — flattened session exploration
-- `/finish/[gameId]` — match summary
-- `/scenarios/shop`, `/scenarios/travel`, `/scenarios/help` — deterministic local targets
-- `/api/arena/*` — validated run, session, artifact, metric, and export APIs
+- `/launch` — configure a live-web duel
+- `/live-run/[runId]` — live viewport, threat HUD, and agent feeds
+- `/run-log` and `/run-log/[runId]` — run list and replay
+- `/evidence` — flattened session exploration
+- `/report/[runId]` — match summary
+- `/sandboxes/storefront`, `/sandboxes/trip-planner`, `/sandboxes/support-desk` — deterministic local targets
+- `/api/run-control/*` — validated run, session, artifact, metric, and export APIs
 
 ## Evaluation boundaries
 

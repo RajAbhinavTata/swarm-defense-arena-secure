@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArenaHeader } from '@/components/arena-header';
+import { OperationsHeader } from '@/components/operations-header';
 
 const HOW_IT_WORKS = [
   {
@@ -48,7 +48,7 @@ export default function HomePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <div style={{ width: 'min(1200px, calc(100% - 2rem))', margin: '0 auto', paddingBottom: '6rem' }}>
-        <ArenaHeader />
+        <OperationsHeader />
 
         {/* ── Hero ── */}
         <section style={{ padding: '5rem 0 4rem', textAlign: 'center', maxWidth: 720, margin: '0 auto' }} className="fade-in">
@@ -80,7 +80,7 @@ export default function HomePage() {
           </p>
 
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/configure" style={{
+            <Link href="/launch" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.8rem 2rem', background: 'var(--accent)', color: '#fff',
               fontSize: 15, fontWeight: 700, borderRadius: 999,
@@ -89,7 +89,7 @@ export default function HomePage() {
             }}>
               Start a Test →
             </Link>
-            <Link href="/history" style={{
+            <Link href="/run-log" style={{
               display: 'inline-flex', alignItems: 'center',
               padding: '0.8rem 2rem',
               border: '1px solid var(--border2)', color: 'var(--tx2)',
@@ -175,7 +175,7 @@ export default function HomePage() {
               Takes about 2 minutes to configure. Results are instant.
             </p>
           </div>
-          <Link href="/configure" style={{
+          <Link href="/launch" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             padding: '0.75rem 1.75rem', background: 'var(--accent)', color: '#fff',
             fontSize: 14, fontWeight: 700, borderRadius: 999, flexShrink: 0,
