@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { SwarmCanvas } from '@/components/arena/swarm-canvas';
 import type { ViewportAlertState, SwarmTimelineEntry } from '@/lib/arena/attack-visualization';
-import type { SentinelSession, TaskAgentStep } from '@/lib/sentinel/types';
+import type { ArenaSession, TaskAgentStep } from '@/lib/simulation/types';
 
 export function LiveViewportFrame({
   session,
@@ -12,7 +12,7 @@ export function LiveViewportFrame({
   promptHealth,
   alert,
 }: {
-  session: SentinelSession;
+  session: ArenaSession;
   latestStep: TaskAgentStep | null;
   timeline: SwarmTimelineEntry[];
   promptHealth: number;

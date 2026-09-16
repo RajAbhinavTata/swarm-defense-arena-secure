@@ -1,19 +1,19 @@
 import { nanoid } from 'nanoid';
-import { saveSession } from '../src/lib/sentinel/store';
-import type { SentinelSession } from '../src/lib/sentinel/types';
+import { saveSession } from '../src/lib/simulation/store';
+import type { ArenaSession } from '../src/lib/simulation/types';
 
 function buildSession(params: {
   scenarioLabel: string;
-  scenarioId: SentinelSession['scenarioId'];
+  scenarioId: ArenaSession['scenarioId'];
   scenarioPath: string;
-  difficulty: SentinelSession['difficulty'];
-  verdict: SentinelSession['finalVerdict'];
-  taskAgentType: SentinelSession['taskAgentType'];
-  redTeamType: SentinelSession['redTeamType'];
+  difficulty: ArenaSession['difficulty'];
+  verdict: ArenaSession['finalVerdict'];
+  taskAgentType: ArenaSession['taskAgentType'];
+  redTeamType: ArenaSession['redTeamType'];
   taskCompleted: boolean;
   attackSucceeded: boolean;
   task: string;
-}): SentinelSession {
+}): ArenaSession {
   const gameId = nanoid(12);
   const startedAt = new Date(Date.now() - Math.floor(Math.random() * 200_000_000)).toISOString();
   const endedAt = new Date(new Date(startedAt).getTime() + 62_000).toISOString();
@@ -172,7 +172,7 @@ function buildSession(params: {
 }
 
 async function seed() {
-  const sessions: SentinelSession[] = [
+  const sessions: ArenaSession[] = [
     buildSession({
       scenarioId: 'demo-shop',
       scenarioLabel: 'Demo Shop',
@@ -215,7 +215,7 @@ async function seed() {
     await saveSession(session);
   }
 
-  console.log(`Seeded ${sessions.length} Sentinel Arena sessions.`);
+  console.log(`Seeded ${sessions.length} Swarm Defense Arena sessions.`);
 }
 
 seed().catch((error) => {

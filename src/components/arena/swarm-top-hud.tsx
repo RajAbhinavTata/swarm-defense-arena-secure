@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from 'react';
 import type { SwarmArenaMetrics } from '@/lib/arena/threat-metrics';
-import type { SentinelSession } from '@/lib/sentinel/types';
+import type { ArenaSession } from '@/lib/simulation/types';
 
 export function SwarmTopHud({
   session,
@@ -15,7 +15,7 @@ export function SwarmTopHud({
   damagePulseKey,
   metrics,
 }: {
-  session: SentinelSession;
+  session: ArenaSession;
   promptHealth: number;
   ghostHealth: number;
   healthBarStyle: CSSProperties;

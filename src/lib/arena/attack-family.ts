@@ -1,4 +1,4 @@
-import type { AttackFamily } from '@/lib/sentinel/types';
+import type { AttackFamily } from '@/lib/simulation/types';
 
 export type ArenaAttackFamily = AttackFamily | 'mcp_exploit' | 'multi_step_chain';
 

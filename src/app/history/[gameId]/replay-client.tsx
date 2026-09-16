@@ -4,19 +4,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { DuelActivityFeed } from '@/components/duel-activity-feed';
-import { SentinelHeader } from '@/components/sentinel-header';
-import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/sentinel/duel-feed';
-import { formatDateTime, formatDuration } from '@/lib/sentinel/format';
-import type { SentinelSession } from '@/lib/sentinel/types';
+import { ArenaHeader } from '@/components/arena-header';
+import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/simulation/duel-feed';
+import { formatDateTime, formatDuration } from '@/lib/simulation/format';
+import type { ArenaSession } from '@/lib/simulation/types';
 
 export function ReplayClient({ gameId }: { gameId: string }) {
-  const [session, setSession] = useState<SentinelSession | null>(null);
+  const [session, setSession] = useState<ArenaSession | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
-    void fetch(`/api/sentinel/${gameId}`, { cache: 'no-store' })
+    void fetch(`/api/arena/${gameId}`, { cache: 'no-store' })
       .then((response) => response.json())
-      .then((payload: { session: SentinelSession }) => {
+      .then((payload: { session: ArenaSession }) => {
         setSession(payload.session);
         setStepIndex(Math.max(0, payload.session.taskAgentSteps.length - 1));
       })
@@ -40,16 +40,16 @@ export function ReplayClient({ gameId }: { gameId: string }) {
 
   if (!session) {
     return (
-      <main className="sentinel-shell no-halo">
-        <SentinelHeader />
+      <main className="arena-shell no-halo">
+        <ArenaHeader />
         <section className="card p-6">Loading replay...</section>
       </main>
     );
   }
 
   return (
-    <main className="sentinel-shell no-halo">
-      <SentinelHeader />
+    <main className="arena-shell no-halo">
+      <ArenaHeader />
 
       <section className="card mb-4 p-4 fade-in">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -60,13 +60,13 @@ export function ReplayClient({ gameId }: { gameId: string }) {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <a href={`/api/sentinel/${gameId}/export?format=json`} className="chip chip-accent">
+            <a href={`/api/arena/${gameId}/export?format=json`} className="chip chip-accent">
               JSON
             </a>
-            <a href={`/api/sentinel/${gameId}/export?format=csv`} className="chip chip-accent">
+            <a href={`/api/arena/${gameId}/export?format=csv`} className="chip chip-accent">
               CSV
             </a>
-            <a href={`/api/sentinel/${gameId}/export?format=sharegpt`} className="chip chip-accent">
+            <a href={`/api/arena/${gameId}/export?format=sharegpt`} className="chip chip-accent">
               ShareGPT JSONL
             </a>
             <Link href="/history" className="chip chip-accent">

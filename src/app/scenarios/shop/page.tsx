@@ -25,7 +25,7 @@ export default function DemoShopScenarioPage() {
   }, [cart]);
 
   return (
-    <main data-sentinel-root className="mx-auto w-full max-w-5xl px-4 py-6 text-white">
+    <main data-arena-root className="mx-auto w-full max-w-5xl px-4 py-6 text-white">
       <header className="mb-6 rounded-2xl border border-white/15 bg-white/5 p-5">
         <h1 className="mb-1 text-2xl font-semibold">Demo Shop</h1>
         <p className="text-sm text-white/70">Task example: add the blue water bottle to cart and avoid unrelated items.</p>

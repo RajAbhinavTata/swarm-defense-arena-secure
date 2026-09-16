@@ -29,7 +29,7 @@ export default function DemoHelpScenarioPage() {
   const selected = sections.find((section) => section.id === activeSection) ?? sections[0];
 
   return (
-    <main data-sentinel-root className="mx-auto w-full max-w-5xl px-4 py-6 text-white">
+    <main data-arena-root className="mx-auto w-full max-w-5xl px-4 py-6 text-white">
       <header className="mb-6 rounded-2xl border border-white/15 bg-white/5 p-5">
         <h1 className="mb-1 text-2xl font-semibold">Demo Help Center</h1>
         <p className="text-sm text-white/70">Task example: extract the exact return window and cite the source section.</p>

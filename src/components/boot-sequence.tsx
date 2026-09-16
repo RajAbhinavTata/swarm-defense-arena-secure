@@ -23,7 +23,7 @@ export function BootSequence() {
   return (
     <div className={`boot-screen ${phase === 'hide' ? 'hide' : ''}`} aria-hidden="true">
       <div className="boot-logo">
-        KRIO<span> THREATSIM</span>
+        SWARM<span> DEFENSE ARENA</span>
       </div>
       <div className="boot-wanted">SWARM DEFENSE INITIALIZING</div>
       <div className="boot-lines">

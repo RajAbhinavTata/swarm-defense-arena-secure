@@ -3,7 +3,7 @@
 import type { CSSProperties } from 'react';
 import { formatAttackFamilyLabel } from '@/lib/arena/attack-family';
 import type { ThreatMetricRow } from '@/lib/arena/threat-metrics';
-import type { AttackFamily } from '@/lib/sentinel/types';
+import type { AttackFamily } from '@/lib/simulation/types';
 
 export function SwarmLegend({
   rows,

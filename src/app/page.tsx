@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SentinelHeader } from '@/components/sentinel-header';
+import { ArenaHeader } from '@/components/arena-header';
 
 const HOW_IT_WORKS = [
   {
@@ -48,7 +48,7 @@ export default function HomePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <div style={{ width: 'min(1200px, calc(100% - 2rem))', margin: '0 auto', paddingBottom: '6rem' }}>
-        <SentinelHeader />
+        <ArenaHeader />
 
         {/* ── Hero ── */}
         <section style={{ padding: '5rem 0 4rem', textAlign: 'center', maxWidth: 720, margin: '0 auto' }} className="fade-in">
@@ -75,7 +75,7 @@ export default function HomePage() {
             fontSize: '1.1rem', color: 'var(--tx2)', lineHeight: 1.7,
             marginBottom: '2.5rem', maxWidth: 540, margin: '0 auto 2.5rem',
           }}>
-            KRIO ThreatSim pits your browser AI agent against a red-team attacker
+            Swarm Defense Arena pits your browser AI agent against a red-team attacker
             on any live website. Watch in real-time. Get a full report.
           </p>
 

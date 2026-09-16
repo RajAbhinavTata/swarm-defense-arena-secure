@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SentinelHeader } from '@/components/sentinel-header';
+import { ArenaHeader } from '@/components/arena-header';
 
 const CONCEPTS = [
   {
@@ -71,7 +71,7 @@ const FAQS = [
   },
   {
     q: 'Where is run data stored?',
-    a: 'Everything is stored locally in a .sentinel-data folder in the project directory. Screenshots are saved in /public/sentinel-screens. Nothing leaves your machine.',
+    a: 'Run records and screenshots are stored under .arena-data and served through validated API routes. Browser traffic reaches the target site, and configured language-model providers receive the policy context needed for LLM-backed modes.',
   },
   {
     q: 'Can I export results?',
@@ -83,7 +83,7 @@ export default function GuidePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <div style={{ width: 'min(800px, calc(100% - 2rem))', margin: '0 auto', paddingBottom: '6rem' }}>
-        <SentinelHeader />
+        <ArenaHeader />
 
         <div style={{ padding: '2rem 0' }}>
           <Link href="/" style={{ fontSize: 13, color: 'var(--tx3)', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: '2rem' }}>
@@ -98,7 +98,7 @@ export default function GuidePage() {
               Guide
             </span>
             <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--tx)', letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
-              What is KRIO ThreatSim?
+              What is Swarm Defense Arena?
             </h1>
             <p style={{ fontSize: 15, color: 'var(--tx2)', lineHeight: 1.7, maxWidth: 580 }}>
               A tool that tests how well AI browser agents hold up when someone tries to trick them.

@@ -41,8 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 data/
-.sentinel-data/
-public/sentinel-screens/
+.arena-data/
 
 # Python
 .venv/

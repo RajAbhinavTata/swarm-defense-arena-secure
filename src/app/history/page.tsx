@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { SentinelHeader } from '@/components/sentinel-header';
-import { formatDateTime, formatDuration, formatPercent } from '@/lib/sentinel/format';
-import { SCENARIOS } from '@/lib/sentinel/scenarios';
-import type { AttackFamily, Difficulty, FinalVerdict, SentinelSession } from '@/lib/sentinel/types';
+import { ArenaHeader } from '@/components/arena-header';
+import { formatDateTime, formatDuration, formatPercent } from '@/lib/simulation/format';
+import { SCENARIOS } from '@/lib/simulation/scenarios';
+import type { AttackFamily, Difficulty, FinalVerdict, ArenaSession } from '@/lib/simulation/types';
 
 const VERDICT_OPTIONS: Array<{ value: '' | FinalVerdict; label: string }> = [
   { value: '',               label: 'All verdicts' },
@@ -24,16 +24,16 @@ const VERDICT_COLORS: Record<string, string> = {
 };
 
 export default function HistoryPage() {
-  const [sessions, setSessions]               = useState<SentinelSession[]>([]);
+  const [sessions, setSessions]               = useState<ArenaSession[]>([]);
   const [scenarioFilter, setScenarioFilter]   = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('');
   const [verdictFilter, setVerdictFilter]     = useState<'' | FinalVerdict>('');
   const [attackFamilyFilter, setAttackFamilyFilter] = useState<'' | AttackFamily>('');
 
   useEffect(() => {
-    void fetch('/api/sentinel/sessions', { cache: 'no-store' })
+    void fetch('/api/arena/sessions', { cache: 'no-store' })
       .then((r) => r.json())
-      .then((p: { sessions: SentinelSession[] }) => setSessions(p.sessions))
+      .then((p: { sessions: ArenaSession[] }) => setSessions(p.sessions))
       .catch(() => setSessions([]));
   }, []);
 
@@ -81,7 +81,7 @@ export default function HistoryPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <div style={{ width: 'min(1200px, calc(100% - 2rem))', margin: '0 auto', paddingBottom: '6rem' }}>
-        <SentinelHeader />
+        <ArenaHeader />
 
         {/* Page header */}
         <div style={{ padding: '2rem 0 1.5rem' }} className="fade-in">

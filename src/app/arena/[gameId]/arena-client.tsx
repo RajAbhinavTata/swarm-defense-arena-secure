@@ -4,15 +4,15 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
 import { SwarmArenaShell } from '@/components/arena/swarm-arena-shell';
-import { SentinelHeader } from '@/components/sentinel-header';
+import { ArenaHeader } from '@/components/arena-header';
 import { buildViewportAlertState, buildSwarmTimeline } from '@/lib/arena/attack-visualization';
 import { buildThreatMetrics } from '@/lib/arena/threat-metrics';
-import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/sentinel/duel-feed';
-import type { SentinelSession } from '@/lib/sentinel/types';
+import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/simulation/duel-feed';
+import type { ArenaSession } from '@/lib/simulation/types';
 
 export function ArenaClient({ gameId }: { gameId: string }) {
   const router = useRouter();
-  const [session, setSession] = useState<SentinelSession | null>(null);
+  const [session, setSession] = useState<ArenaSession | null>(null);
   const [error, setError] = useState<string | null>(null);
   const didRouteToFinish = useRef(false);
 
@@ -22,12 +22,12 @@ export function ArenaClient({ gameId }: { gameId: string }) {
 
     async function poll() {
       try {
-        const response = await fetch(`/api/sentinel/${gameId}`, { cache: 'no-store' });
+        const response = await fetch(`/api/arena/${gameId}`, { cache: 'no-store' });
         if (!response.ok) {
           throw new Error('Failed to load session');
         }
 
-        const payload = (await response.json()) as { session: SentinelSession };
+        const payload = (await response.json()) as { session: ArenaSession };
         if (cancelled) {
           return;
         }
@@ -135,8 +135,8 @@ export function ArenaClient({ gameId }: { gameId: string }) {
 
   if (error) {
     return (
-      <main className="sentinel-shell swarm-arena-shell">
-        <SentinelHeader />
+      <main className="arena-shell swarm-arena-shell">
+        <ArenaHeader />
         <section className="card p-6">
           <p className="text-sm text-[var(--red)]">{error}</p>
           <Link href="/" className="mt-3 inline-block text-sm text-[var(--accent)]">
@@ -149,16 +149,16 @@ export function ArenaClient({ gameId }: { gameId: string }) {
 
   if (!session || !metrics || !viewportAlert) {
     return (
-      <main className="sentinel-shell swarm-arena-shell">
-        <SentinelHeader />
+      <main className="arena-shell swarm-arena-shell">
+        <ArenaHeader />
         <section className="card p-6 text-sm text-[var(--text-muted)]">Loading swarm arena...</section>
       </main>
     );
   }
 
   return (
-    <main className="sentinel-shell swarm-arena-shell">
-      <SentinelHeader />
+    <main className="arena-shell swarm-arena-shell">
+      <ArenaHeader />
       <SwarmArenaShell
         gameId={gameId}
         session={session}

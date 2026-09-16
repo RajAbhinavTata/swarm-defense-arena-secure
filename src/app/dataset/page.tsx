@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { SentinelHeader } from '@/components/sentinel-header';
-import type { SentinelSession, TaskAgentStep } from '@/lib/sentinel/types';
+import { ArenaHeader } from '@/components/arena-header';
+import type { ArenaSession, TaskAgentStep } from '@/lib/simulation/types';
 
 interface StepRow {
   gameId: string;
@@ -19,13 +19,13 @@ interface StepRow {
 }
 
 export default function DatasetPage() {
-  const [sessions, setSessions] = useState<SentinelSession[]>([]);
+  const [sessions, setSessions] = useState<ArenaSession[]>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    void fetch('/api/sentinel/sessions', { cache: 'no-store' })
+    void fetch('/api/arena/sessions', { cache: 'no-store' })
       .then((response) => response.json())
-      .then((payload: { sessions: SentinelSession[] }) => setSessions(payload.sessions))
+      .then((payload: { sessions: ArenaSession[] }) => setSessions(payload.sessions))
       .catch(() => setSessions([]));
   }, []);
 
@@ -61,8 +61,8 @@ export default function DatasetPage() {
   }, [sessions, query]);
 
   return (
-    <main className="sentinel-shell">
-      <SentinelHeader />
+    <main className="arena-shell">
+      <ArenaHeader />
 
       <section className="card mb-4 p-4 fade-in">
         <h2 className="mb-2 text-2xl font-semibold">Trace Explorer</h2>
@@ -80,13 +80,13 @@ export default function DatasetPage() {
           />
 
           <div className="flex flex-wrap gap-2">
-            <Link href="/api/sentinel/export?format=json" className="chip chip-accent">
+            <Link href="/api/arena/export?format=json" className="chip chip-accent">
               Export JSON
             </Link>
-            <Link href="/api/sentinel/export?format=csv" className="chip chip-accent">
+            <Link href="/api/arena/export?format=csv" className="chip chip-accent">
               Export CSV
             </Link>
-            <Link href="/api/sentinel/export?format=sharegpt" className="chip chip-accent">
+            <Link href="/api/arena/export?format=sharegpt" className="chip chip-accent">
               Export ShareGPT JSONL
             </Link>
           </div>
@@ -130,7 +130,7 @@ export default function DatasetPage() {
   );
 }
 
-function toRow(session: SentinelSession, step: TaskAgentStep, family: string): StepRow {
+function toRow(session: ArenaSession, step: TaskAgentStep, family: string): StepRow {
   return {
     gameId: session.gameId,
     scenario: session.scenarioLabel,

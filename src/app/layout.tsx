@@ -5,7 +5,7 @@ import { DEFAULT_THEME, THEME_STORAGE_KEY } from '@/lib/theme';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'KRIO ThreatSim',
+  title: 'Swarm Defense Arena',
   description: 'Swarm Defense Arena for adversarial browser-agent simulation',
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Script id="threatsim-theme-init" strategy="beforeInteractive">
+        <Script id="arena-ui-theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
         <div id="showdown-overlay" aria-hidden="true">

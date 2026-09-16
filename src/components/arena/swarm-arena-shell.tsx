@@ -8,8 +8,8 @@ import { SwarmTopHud } from '@/components/arena/swarm-top-hud';
 import { ThreatPanel } from '@/components/arena/threat-panel';
 import type { ViewportAlertState, SwarmTimelineEntry } from '@/lib/arena/attack-visualization';
 import type { SwarmArenaMetrics } from '@/lib/arena/threat-metrics';
-import type { DuelFeedItem } from '@/lib/sentinel/duel-feed';
-import type { RedTeamAction, SentinelSession, TaskAgentStep } from '@/lib/sentinel/types';
+import type { DuelFeedItem } from '@/lib/simulation/duel-feed';
+import type { RedTeamAction, ArenaSession, TaskAgentStep } from '@/lib/simulation/types';
 import type { CSSProperties } from 'react';
 
 export function SwarmArenaShell({
@@ -31,7 +31,7 @@ export function SwarmArenaShell({
   damagePulseKey,
 }: {
   gameId: string;
-  session: SentinelSession;
+  session: ArenaSession;
   latestStep: TaskAgentStep | null;
   latestRedAction: RedTeamAction | null;
   timeline: SwarmTimelineEntry[];
@@ -139,13 +139,13 @@ export function SwarmArenaShell({
               <h3 className="swarm-card-title">Events, Rationale, Exports</h3>
             </div>
             <div className="swarm-export-links">
-              <a href={`/api/sentinel/${gameId}/export?format=json`} className="chip chip-accent">
+              <a href={`/api/arena/${gameId}/export?format=json`} className="chip chip-accent">
                 JSON
               </a>
-              <a href={`/api/sentinel/${gameId}/export?format=csv`} className="chip chip-accent">
+              <a href={`/api/arena/${gameId}/export?format=csv`} className="chip chip-accent">
                 CSV
               </a>
-              <a href={`/api/sentinel/${gameId}/export?format=sharegpt`} className="chip chip-accent">
+              <a href={`/api/arena/${gameId}/export?format=sharegpt`} className="chip chip-accent">
                 ShareGPT
               </a>
               {session.endedAt ? (

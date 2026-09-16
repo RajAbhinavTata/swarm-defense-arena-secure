@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type KeyboardEvent } from 'react';
-import type { DuelFeedItem, DuelFeedTone } from '@/lib/sentinel/duel-feed';
+import type { DuelFeedItem, DuelFeedTone } from '@/lib/simulation/duel-feed';
 
 export function DuelActivityFeed({
   title,

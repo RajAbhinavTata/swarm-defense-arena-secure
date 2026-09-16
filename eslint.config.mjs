@@ -10,9 +10,7 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
-    'legacy/**',
-    '.sentinel-data/**',
-    'public/sentinel-screens/**',
+    '.arena-data/**',
   ]),
 ]);
 

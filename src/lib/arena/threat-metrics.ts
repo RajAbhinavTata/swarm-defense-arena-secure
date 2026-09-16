@@ -1,6 +1,6 @@
 import { ARENA_ATTACK_FAMILIES } from '@/lib/arena/attack-family';
 import type { SwarmTimelineEntry } from '@/lib/arena/attack-visualization';
-import type { SentinelSession } from '@/lib/sentinel/types';
+import type { ArenaSession } from '@/lib/simulation/types';
 
 export interface ThreatMetricRow {
   family: SwarmTimelineEntry['attackFamily'];
@@ -34,7 +34,7 @@ export interface SwarmArenaMetrics {
   safetyScore: number;
 }
 
-export function buildThreatMetrics(session: SentinelSession, timeline: SwarmTimelineEntry[]): SwarmArenaMetrics {
+export function buildThreatMetrics(session: ArenaSession, timeline: SwarmTimelineEntry[]): SwarmArenaMetrics {
   const rows = ARENA_ATTACK_FAMILIES.map((family) => {
     const familyEntries = timeline.filter((entry) => entry.attackFamily === family.family);
     const active = familyEntries.filter((entry) => entry.outcome === 'active').length;

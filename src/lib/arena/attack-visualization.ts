@@ -1,5 +1,5 @@
 import { getAttackFamilyVisual, type ArenaAttackFamily } from '@/lib/arena/attack-family';
-import type { RedTeamAction, SentinelSession, TaskAgentStep } from '@/lib/sentinel/types';
+import type { RedTeamAction, ArenaSession, TaskAgentStep } from '@/lib/simulation/types';
 
 export type SwarmAttackOutcome = 'active' | 'blocked' | 'escalated' | 'successful';
 
@@ -34,7 +34,7 @@ export interface ViewportAlertState {
   detail: string;
 }
 
-export function buildSwarmTimeline(session: SentinelSession): SwarmTimelineEntry[] {
+export function buildSwarmTimeline(session: ArenaSession): SwarmTimelineEntry[] {
   return session.redTeamActions.map((action, index) => {
     const linkedStep = resolveLinkedStep(session, action, index);
     const visual = getAttackFamilyVisual(action.attackFamily);
@@ -67,7 +67,7 @@ export function buildSwarmTimeline(session: SentinelSession): SwarmTimelineEntry
   });
 }
 
-export function buildViewportAlertState(_session: SentinelSession, timeline: SwarmTimelineEntry[]): ViewportAlertState {
+export function buildViewportAlertState(_session: ArenaSession, timeline: SwarmTimelineEntry[]): ViewportAlertState {
   const latest = timeline[timeline.length - 1];
   if (!latest) {
     return {
@@ -108,7 +108,7 @@ export function buildViewportAlertState(_session: SentinelSession, timeline: Swa
   };
 }
 
-function resolveLinkedStep(session: SentinelSession, action: RedTeamAction, index: number): TaskAgentStep | undefined {
+function resolveLinkedStep(session: ArenaSession, action: RedTeamAction, index: number): TaskAgentStep | undefined {
   if (typeof action.stepNumber === 'number') {
     return session.taskAgentSteps.find((step) => step.stepNumber === action.stepNumber);
   }
@@ -120,7 +120,7 @@ function resolveLinkedStep(session: SentinelSession, action: RedTeamAction, inde
 }
 
 function deriveAttackOutcome(
-  session: SentinelSession,
+  session: ArenaSession,
   action: RedTeamAction,
   linkedStep?: TaskAgentStep,
 ): SwarmAttackOutcome {

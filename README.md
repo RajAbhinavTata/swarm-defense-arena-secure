@@ -2,13 +2,11 @@
 
 A hardened, testable adversarial evaluation arena for browser agents. A Task Agent attempts a browser task while a Red-Team Agent injects prompt overrides, deceptive controls, diversions, and synthetic exfiltration bait. Every run produces screenshots, structured events, policy decisions, risk evidence, a verdict, replay data, and exports.
 
-This repository is a clean-history, security-focused rebuild of [saivinjam2/awskriothreatsim](https://github.com/saivinjam2/awskriothreatsim). It retains the visual arena and synthetic scenarios while replacing unsafe runtime boundaries and repairing evaluation logic.
-
-## What is different
+## Security and reliability
 
 - Safe-by-default target validation blocks private, loopback, link-local, reserved, and multicast addresses, including redirected subresources.
 - External targets require HTTPS. Localhost is allowed only when the application itself is accessed locally.
-- Non-local API access is denied unless `SENTINEL_API_TOKEN` is configured.
+- Non-local API access is denied unless `ARENA_API_TOKEN` is configured.
 - Run creation has same-origin enforcement, rate limits, and a bounded in-process queue.
 - Session files are written atomically and screenshots live outside `public/`, behind a validated API route.
 - Password and secret-like typed values are redacted from traces.
@@ -65,12 +63,12 @@ LLM-backed modes are optional. Without provider keys, red-team planning falls ba
 |---|---|---|
 | `OPENAI_API_KEY` | Optional OpenAI policy access | unset |
 | `ANTHROPIC_API_KEY` | Optional Anthropic policy access | unset |
-| `SENTINEL_API_TOKEN` | Required Bearer token for non-local API access | unset |
-| `SENTINEL_ALLOW_PRIVATE_TARGETS` | Explicitly permit private-network browser targets | `false` |
-| `SENTINEL_MAX_CONCURRENT_RUNS` | Chromium concurrency, clamped to 1–8 | `2` |
-| `SENTINEL_MAX_RUNS_PER_MINUTE` | Per-client start rate | `6` |
-| `SENTINEL_NAVIGATION_TIMEOUT_MS` | Initial navigation timeout | `30000` |
-| `SENTINEL_LLM_TIMEOUT_MS` | Provider request timeout | `12000` |
+| `ARENA_API_TOKEN` | Required Bearer token for non-local API access | unset |
+| `ARENA_ALLOW_PRIVATE_TARGETS` | Explicitly permit private-network browser targets | `false` |
+| `ARENA_MAX_CONCURRENT_RUNS` | Chromium concurrency, clamped to 1–8 | `2` |
+| `ARENA_MAX_RUNS_PER_MINUTE` | Per-client start rate | `6` |
+| `ARENA_NAVIGATION_TIMEOUT_MS` | Initial navigation timeout | `30000` |
+| `ARENA_LLM_TIMEOUT_MS` | Provider request timeout | `12000` |
 
 Do not enable private targets on an internet-accessible process. See [SECURITY.md](SECURITY.md).
 
@@ -94,7 +92,7 @@ pnpm seed         # deterministic sample sessions
 - `/dataset` — flattened session exploration
 - `/finish/[gameId]` — match summary
 - `/scenarios/shop`, `/scenarios/travel`, `/scenarios/help` — deterministic local targets
-- `/api/sentinel/*` — validated run, session, artifact, metric, and export APIs
+- `/api/arena/*` — validated run, session, artifact, metric, and export APIs
 
 ## Evaluation boundaries
 
@@ -106,6 +104,6 @@ Use synthetic accounts and non-sensitive tasks. Even with redaction, screenshots
 
 The production build and automated checks are required in CI. Local JSON storage and the in-process queue are deliberate single-host constraints, documented rather than hidden. See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules.
 
-## Attribution and licensing
+## Notices
 
-This refactor derives from the public `saivinjam2/awskriothreatsim` repository. The upstream repository did not include an explicit license when this refactor was created, so this repository does not assert a new license over upstream-derived material. Obtain permission from the relevant copyright holders before redistribution or reuse.
+See [NOTICE.md](NOTICE.md) for provenance and licensing information.

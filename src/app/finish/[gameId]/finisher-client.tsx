@@ -3,19 +3,19 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { DuelActivityFeed } from '@/components/duel-activity-feed';
-import { SentinelHeader } from '@/components/sentinel-header';
-import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/sentinel/duel-feed';
-import { formatDateTime, formatDuration } from '@/lib/sentinel/format';
-import type { SentinelSession } from '@/lib/sentinel/types';
+import { ArenaHeader } from '@/components/arena-header';
+import { buildRedTeamFeedItems, buildTaskAgentFeedItems } from '@/lib/simulation/duel-feed';
+import { formatDateTime, formatDuration } from '@/lib/simulation/format';
+import type { ArenaSession } from '@/lib/simulation/types';
 
 export function FinisherClient({ gameId }: { gameId: string }) {
-  const [session, setSession] = useState<SentinelSession | null>(null);
+  const [session, setSession] = useState<ArenaSession | null>(null);
   const [error, setError]     = useState<string | null>(null);
 
   useEffect(() => {
-    void fetch(`/api/sentinel/${gameId}`, { cache: 'no-store' })
+    void fetch(`/api/arena/${gameId}`, { cache: 'no-store' })
       .then((r) => { if (!r.ok) throw new Error('Failed to load'); return r.json(); })
-      .then((p: { session: SentinelSession }) => { setSession(p.session); setError(null); })
+      .then((p: { session: ArenaSession }) => { setSession(p.session); setError(null); })
       .catch((e) => { setSession(null); setError((e as Error).message); });
   }, [gameId]);
 
@@ -37,8 +37,8 @@ export function FinisherClient({ gameId }: { gameId: string }) {
 
   if (error) {
     return (
-      <div className="threatsim-shell">
-        <SentinelHeader />
+      <div className="arena-ui-shell">
+        <ArenaHeader />
         <main className="fin-main">
           <div className="card fin-error-card">
             <p className="fin-error-msg">{error}</p>
@@ -51,8 +51,8 @@ export function FinisherClient({ gameId }: { gameId: string }) {
 
   if (!session) {
     return (
-      <div className="threatsim-shell">
-        <SentinelHeader />
+      <div className="arena-ui-shell">
+        <ArenaHeader />
         <main className="fin-main">
           <div className="card fin-loading-card">Loading results...</div>
         </main>
@@ -85,8 +85,8 @@ export function FinisherClient({ gameId }: { gameId: string }) {
     : 'var(--yellow-dim)';
 
   return (
-    <div className="threatsim-shell">
-      <SentinelHeader />
+    <div className="arena-ui-shell">
+      <ArenaHeader />
 
       <main className="fin-main">
 
@@ -217,9 +217,9 @@ export function FinisherClient({ gameId }: { gameId: string }) {
         <div className="fin-actions">
           <Link href="/configure"   className="fin-btn-primary">New Run →</Link>
           <Link href="/history"     className="fin-btn-secondary">Archive</Link>
-          <a href={`/api/sentinel/${gameId}/export?format=json`}     className="fin-btn-secondary">JSON</a>
-          <a href={`/api/sentinel/${gameId}/export?format=csv`}      className="fin-btn-secondary">CSV</a>
-          <a href={`/api/sentinel/${gameId}/export?format=sharegpt`} className="fin-btn-secondary">ShareGPT</a>
+          <a href={`/api/arena/${gameId}/export?format=json`}     className="fin-btn-secondary">JSON</a>
+          <a href={`/api/arena/${gameId}/export?format=csv`}      className="fin-btn-secondary">CSV</a>
+          <a href={`/api/arena/${gameId}/export?format=sharegpt`} className="fin-btn-secondary">ShareGPT</a>
         </div>
 
       </main>

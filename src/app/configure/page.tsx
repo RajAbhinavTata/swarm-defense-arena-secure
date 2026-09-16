@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SentinelHeader } from '@/components/sentinel-header';
-import { LIVE_WEB_PRESETS } from '@/lib/sentinel/live-web-presets';
-import type { Difficulty, RedTeamType, TaskAgentType } from '@/lib/sentinel/types';
+import { ArenaHeader } from '@/components/arena-header';
+import { LIVE_WEB_PRESETS } from '@/lib/simulation/live-web-presets';
+import type { Difficulty, RedTeamType, TaskAgentType } from '@/lib/simulation/types';
 
 const STEPS = ['Target', 'Difficulty', 'Agents', 'Review'];
 
@@ -129,7 +129,7 @@ export default function ConfigurePage() {
     setLaunchError('');
     const pair = AGENT_PAIRS[agentPairIdx]!;
     try {
-      const res = await fetch('/api/sentinel/start', {
+      const res = await fetch('/api/arena/start', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -159,7 +159,7 @@ export default function ConfigurePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <div style={{ width: 'min(760px, calc(100% - 2rem))', margin: '0 auto', paddingBottom: '6rem' }}>
-        <SentinelHeader />
+        <ArenaHeader />
 
         {/* Back link */}
         <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--tx3)', margin: '1.5rem 0 2rem' }}>
